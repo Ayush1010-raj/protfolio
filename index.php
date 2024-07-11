@@ -778,8 +778,14 @@
         $Message = isset($_POST['Message']) ? $_POST['Message'] : '';
 
         // Database connection
-        $conn = new mysqli('localhost', 'root', '', 'test');
+        $servername = "sql307.infinityfree.com";
+    $username = "if0_36884004";
+    $password = "OOcdUY1XV4ob";
+    $database = "if0_36884004_test";
+    $port = 3306; // optional, default MySQL port
 
+// Create connection
+$conn = new mysqli($servername, $username, $password, $database, $port);
         // Prepare and bind the SQL statement
         $stmt = $conn->prepare("INSERT INTO test (Username, email, Phone, Message) VALUES (?, ?, ?, ?)");
         // Bind parameters
@@ -796,23 +802,20 @@
 
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="contact__form">
                 <div class="input__container">
-                    <input type="text" name="Username"class="input">
-                    <label for="">Username</label>
+                    <input type="text" name="Username" placeholder="Username" class="input" onclick="clearPlaceholder(this)">
                     <span>Username</span>
                 </div>
                 <div class="input__container">
-                    <input type="email" name="email" class="input">
-                    <label for="">email</label>
+                    <input type="email" name="email" placeholder="email" class="input" onclick="clearPlaceholder(this)">
+                   
                     <span>email</span>
                 </div>
                 <div class="input__container">
-                    <input type="tel" name="Phone" class="input">
-                    <label for="">Phone</label>
+                    <input type="tel" name="Phone" placeholder="Phone" class="input" onclick="clearPlaceholder(this)">
                     <span>Phone</span>
                 </div>
                 <div class="input__container textarea">
-                    <textarea name="Message"  class="input" ></textarea>
-                    <label for="">Message</label>
+                   <textarea name="Message" placeholder="Message" class="input" onclick="clearPlaceholder(this)"></textarea>
                     <span>Message</span>
                 </div>
                 <button type="submit" class="button"><i class="uil uil-navigator button__icon"></i>
@@ -860,6 +863,14 @@
 
  </main>
  
+ <script>
+        // JavaScript function definition
+        function clearPlaceholder(element) {
+            if (element.value === element.placeholder) {
+                element.value = ''; // Clear the input value
+            }
+        }
+    </script>
  <script src="assests/js/mixitup.min.js"></script>
  <script src="assests/js/swiper-bundle.min.js"></script>
  <script src="assests/js/main.js"></script>
